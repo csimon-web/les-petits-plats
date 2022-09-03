@@ -9,11 +9,6 @@
 
 [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url]
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_repo`
-
-Then you can delete these lines !
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -23,7 +18,8 @@ Here you can describe the project, why you made it and **for who you made it**, 
 
 ### Built With
 
-- Markdown, Html, Css
+- Markdown, Html, Css, Javascript
+- Bootstrap
 - Git, Github
 - VS Code
 - Love
@@ -44,17 +40,17 @@ sudo apt-get install git
  
 1. Clone the repo
 ```sh
-git clone https://github.com/christophe-simon/name-of-the-repo
+git clone https://github.com/christophe-simon/petitsplats
 ```
 2. Open the index.html file in your favorite internet browser
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+<!--## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://example.com)_-->
 
 
 <!-- CONTACT -->
@@ -62,7 +58,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Christophe Simon: [personnal website](https://www.csimon.info)
 
-Project Link: [https://github.com/christophe-simon/github_repo](https://github.com/christophe-simon/github_repo)
+Project Link: [https://github.com/christophe-simon/petitsplats](https://github.com/christophe-simon/petitsplats)
 
 
 
@@ -70,7 +66,7 @@ Project Link: [https://github.com/christophe-simon/github_repo](https://github.c
 ## Acknowledgements
 
 - This readme version is a simplified version of this [github repository](https://github.com/othneildrew/Best-README-Template) by Othneildrew
-- This readme version is a customized version of this [github repository](https://github.com/NicolasBrondin/basic-readme-template) by NicolasBrondin
+- This readme version is a customized version of this [github repository](https://github.com/christophe-simon/petitsplats) by NicolasBrondin
 
 
 
@@ -78,16 +74,14 @@ Project Link: [https://github.com/christophe-simon/github_repo](https://github.c
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/NicolasBrondin/basic-readme-template.svg?style=flat-square
-[contributors-url]: https://github.com/NicolasBrondin/basic-readme-template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/NicolasBrondin/basic-readme-template.svg?style=flat-square
-[forks-url]: https://github.com/NicolasBrondin/basic-readme-template/network/members
-[stars-shield]: https://img.shields.io/github/stars/NicolasBrondin/basic-readme-template.svg?style=flat-square
-[stars-url]: https://github.com/NicolasBrondin/basic-readme-template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/NicolasBrondin/basic-readme-template.svg?style=flat-square
-[issues-url]: https://github.com/NicolasBrondin/basic-readme-template/issues
-[license-shield]: https://img.shields.io/github/license/NicolasBrondin/basic-readme-template.svg?style=flat-square
-[license-url]: https://github.com/NicolasBrondin/basic-readme-template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[contributors-shield]: https://img.shields.io/github/contributors/christophe-simon/petitsplats.svg?style=flat-square
+[contributors-url]: https://github.com/christophe-simon/petitsplats/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/christophe-simon/petitsplats.svg?style=flat-square
+[forks-url]: https://github.com/christophe-simon/petitsplats/network/members
+[stars-shield]: https://img.shields.io/github/stars/christophe-simon/petitsplats.svg?style=flat-square
+[stars-url]: https://github.com/christophe-simon/petitsplats/stargazers
+[issues-shield]: https://img.shields.io/github/issues/christophe-simon/petitsplats.svg?style=flat-square
+[issues-url]: https://github.com/christophe-simon/petitsplats/issues
+[license-shield]: https://img.shields.io/github/license/christophe-simon/petitsplats.svg?style=flat-square
+[license-url]: https://github.com/christophe-simon/petitsplats/blob/master/LICENSE.txt
 [product-screenshot]: docs/cover.jpg
