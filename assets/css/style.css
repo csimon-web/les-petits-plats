@@ -1,0 +1,96 @@
+body {
+
+}
+
+.title {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 47px;
+    letter-spacing: 0em;
+    color: #D04F4F;
+}
+
+.search_field, .search_button {
+    background: #E7E7E7;
+}
+
+.btn.dropdown-toggle {
+    font-family: "Lato";
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: #FFF;
+}
+
+.first_button {
+    background: #3282F7;
+}
+
+.second_button {
+    background: #68D9A4;
+}
+
+.third_button {
+    background: #ED6454;
+}
+
+.card {
+    border-radius: 5px;
+}
+
+.image {
+    background: #C7BEBE;
+    width: 100%;
+    min-height: 100px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    background: #E7E7E7;
+    padding: 10px;
+    font-family: 'Lato';
+    font-style: normal;
+    color: #000;   
+}
+
+.description__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.description__header__title {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.description__header__required_time {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+}
+
+.description__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.description__content__ingredients {
+    width: 49%;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+}
+
+.description__content__preparation {
+    width: 49%;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 100%;
+}
