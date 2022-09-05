@@ -16,6 +16,26 @@ body {
     background: #E7E7E7;
 }
 
+.search_field {
+    border-right: unset;
+}
+
+.search_button {
+    border: 1px solid #ced4da;
+    border-left: unset;
+    border-top-right-radius: .375rem;
+    border-bottom-right-radius: .375rem;
+}
+
+.input-group-text.fa.fa-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: unset;
+    height: 100%;
+    border: unset;
+}
+
 .btn.dropdown-toggle {
     font-family: "Lato";
     font-style: normal;
