@@ -3,11 +3,11 @@ class Api {
         this.url = url
     }
 
-    async getRecipesArray() {
+    async getRecipes() {
         const response = await fetch(this.url)
         const data = await response.json()
         const recipesData = data.recipes
-        const recipesArray = recipesData.map((recipe) => new Recipe(recipe))
-        return recipesArray
+        const recipes = recipesData.map((recipe) => new Recipe(recipe))
+        return recipes
     }
 }
