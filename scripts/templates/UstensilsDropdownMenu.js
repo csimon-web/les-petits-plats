@@ -1,12 +1,13 @@
 class UstensilsDropdownMenu {
-    constructor(ustensils) {
-        this.ustensils = ustensils
+    constructor(ustensil) {
+        this.ustensil = ustensil
     }
 
     createDropdownMenuItem() {
-        const item = `
-            <a class="dropdown-item" href="#">Action</a>
-        `
+        const item = document.createElement('a')
+        item.classList.add('dropdown-item')
+        item.setAttribute('href', '#')
+        item.textContent = this.ustensil
         return item
     }
 }

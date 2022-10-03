@@ -36,6 +36,14 @@ body {
     border: unset;
 }
 
+.ingredient_tag, .appliance_tag, .ustensil_tag {
+    display: inline-block;
+}
+
+.ingredient_tag, .appliance_tag, .ustensil_tag, .ingredient_tag:hover, .appliance_tag:hover, .ustensil_tag:hover, .ingredient_tag:focus, .appliance_tag:focus, .ustensil_tag:focus  {
+    color: #FFF;
+}
+
 .btn.dropdown-toggle {
     font-family: "Lato";
     font-style: normal;
@@ -47,15 +55,15 @@ body {
     color: #FFF;
 }
 
-.first_button {
+.ingredient_tag:hover, .btn.dropdown-toggle.first_color:hover, .btn.dropdown-toggle.first_color:focus, .first_color {
     background: #3282F7;
 }
 
-.second_button {
+.appliance_tag:hover, .btn.dropdown-toggle.second_color:hover, .btn.dropdown-toggle.second_color:focus, .second_color {
     background: #68D9A4;
 }
 
-.third_button {
+.ustensil_tag:hover, .btn.dropdown-toggle.third_color:hover, .btn.dropdown-toggle.third_color:focus, .third_color {
     background: #ED6454;
 }
 
@@ -91,6 +99,8 @@ body {
 }
 
 .description__header__required_time {
+    min-width: 90px;
+    text-align: right;
     font-size: 18px;
     font-weight: 700;
     line-height: 22px;
@@ -99,18 +109,19 @@ body {
 .description__content {
     display: flex;
     justify-content: space-between;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
 }
 
 .description__content__ingredients {
     width: 49%;
-    font-size: 12px;
+}
+
+.description__content__ingredients .ingredients{
     font-weight: 700;
-    line-height: 14px;
 }
 
 .description__content__preparation {
     width: 49%;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 100%;
 }

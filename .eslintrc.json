@@ -27,12 +27,18 @@
         "func-names": "off",
         "no-process-exit": "off",
         "object-shorthand": "off",
-        "class-methods-use-this": "off"
+        "class-methods-use-this": "off",
+        "no-restricted-syntax": "off",
+        "no-use-before-define": "off",
+        "no-prototype-builtins": "off",
+        "no-shadow": "off"
     },
     "globals": {
         "Api": "readonly",
         "AppliancesDropdownMenu": "readonly",
+        "IngredientsDropdownMenu": "readonly",
         "Recipe": "readonly",
-        "RecipeCard": "readonly"
+        "RecipeCard": "readonly",
+        "UstensilsDropdownMenu": "readonly"
     }
 }

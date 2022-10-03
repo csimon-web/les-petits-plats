@@ -1,12 +1,12 @@
 class AppliancesDropdownMenu {
-    constructor(appliances) {
-        this.appliances = appliances
+    constructor(appliance) {
+        this.appliance = appliance
     }
 
     createDropdownMenuItem() {
-        const item = `
-            <a class="dropdown-item" href="#">Action</a>
-        `
+        const item = document.createElement('span')
+        item.classList.add('dropdown-item')
+        item.textContent = this.appliance
         return item
     }
 }

@@ -4,6 +4,21 @@ class RecipeCard {
     }
 
     createRecipeCard() {
+        let ingredients = ''
+        for (const ingredient of this.recipe.ingredients) {
+            if (ingredient.hasOwnProperty('quantity')) {
+                ingredients += `<span class="ingredients">${ingredient.ingredient}:</span> ${ingredient.quantity}`
+                if (ingredient.hasOwnProperty('unit')) {
+                    ingredients += ` ${ingredient.unit}<br>`
+                } else {
+                    ingredients += `<br>`
+                }
+            } else {
+                ingredients += `<span class="ingredients">${ingredient.ingredient}</span><br>`
+            }
+
+        }
+
         const recipeCard = document.createElement('div')
         recipeCard.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-lg-3')
         const content = `
@@ -21,6 +36,7 @@ class RecipeCard {
                 </div>
                 <div class="description__content">
                     <p class="description__content__ingredients">
+                        ${ingredients}
                     </p>
                     <p class="description__content__preparation">
                         ${this.recipe.description}
