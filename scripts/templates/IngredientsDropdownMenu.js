@@ -4,9 +4,8 @@ class IngredientsDropdownMenu {
     }
 
     createDropdownMenuItem() {
-        const item = document.createElement('a')
+        const item = document.createElement('span')
         item.classList.add('dropdown-item')
-        item.setAttribute('href', '#')
         item.textContent = this.ingredient
         return item
     }

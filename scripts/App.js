@@ -10,7 +10,6 @@ class App {
             'ingredients_dropdown_menu'
         )
         this.recipesWrapper = document.querySelector('.recipes > .row')
-        // eslint-disable-next-line no-unused-expressions
         this.recipes
         this.api = new Api('/data/recipes.json')
     }
@@ -126,7 +125,7 @@ class App {
         )
     }
 
-    async getAppliancesFromRecipes(recipes) {
+    getAppliancesFromRecipes(recipes) {
         return recipes
             .map((recipe) => recipe.appliance)
             .filter((value, index, self) => self.indexOf(value) === index)
@@ -204,9 +203,11 @@ class App {
     createEventsOnSearchBar() {
         const input = document.querySelector('.search .input-group input')
         input.addEventListener('input', async () => {
-            this.deleteCards()
-            this.recipes = await this.search(input.value)
-            this.displayCards(this.recipes)
+            if (input.textLength >= 3) {
+                this.deleteCards()
+                this.recipes = await this.search(input.value)
+                this.displayCards(this.recipes)
+            }
         })
     }
 
@@ -228,7 +229,7 @@ class App {
                     'appliance_tag',
                     'btn',
                     'mb-3',
-                    'mr-3',
+                    'me-3',
                     'py-2',
                     'second_color'
                 )
@@ -256,7 +257,7 @@ class App {
                     'ustensil_tag',
                     'btn',
                     'mb-3',
-                    'mr-3',
+                    'me-3',
                     'py-2',
                     'third_color'
                 )
@@ -281,7 +282,7 @@ class App {
                     'ingredient_tag',
                     'btn',
                     'mb-3',
-                    'mr-3',
+                    'me-3',
                     'py-2',
                     'first_color'
                 )
