@@ -11,41 +11,14 @@ class App {
         )
         this.recipesWrapper = document.querySelector('.recipes > .row')
         this.recipes
+        this.searchKeyword = ''
+        this.appliancesTags = []
+        this.ustensilsTags = []
+        this.ingredientsTags = []
         this.api = new Api('/data/recipes.json')
     }
 
-    async displayHomePage() {
-        this.recipes = await this.api.getRecipes()
-        const appliancesInDropdownMenu = await this.getAppliancesFromRecipes(
-            this.recipes
-        )
-        const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-            this.recipes
-        )
-        const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-            this.recipes
-        )
-
-        this.displayCards(this.recipes)
-        this.displayAppliancesDropdownMenu(appliancesInDropdownMenu)
-        this.displayUstensilsDropdownMenu(ustensilsInDropdownMenu)
-        this.displayIngredientsDropdownMenu(ingredientsInDropdownMenu)
-
-        this.createEventsOnSearchBar()
-        this.createEventsOnAppliancesItems()
-        this.createEventsOnUstensilsItems()
-        this.createEventsOnIngredientsItems()
-
-        // this.filterByAppliances()
-    }
-
-    displayErrorPage() {
-        console.log(
-            'Aucune page ne correspond malheureusement à cette adresse.'
-        )
-    }
-
-    async searchWithAnAppliance(appliance) {
+    async filterWithAnAppliance(appliance) {
         const applianceInLowerCase = appliance.toLowerCase()
         this.recipes = await this.api.getRecipes()
         return this.recipes.filter((recipe) =>
@@ -53,7 +26,7 @@ class App {
         )
     }
 
-    async searchWithAnUstensil(ustensil) {
+    async filterWithAnUstensil(ustensil) {
         const ustensilInLowerCase = ustensil.toLowerCase()
         this.recipes = await this.api.getRecipes()
         return this.recipes.filter((recipe) =>
@@ -63,7 +36,7 @@ class App {
         )
     }
 
-    async searchWithAnIngredient(ingredient) {
+    async filterWithAnIngredient(ingredient) {
         const ingredientInLowerCase = ingredient.toLowerCase()
         this.recipes = await this.api.getRecipes()
         return this.recipes.filter((recipe) =>
@@ -73,7 +46,7 @@ class App {
         )
     }
 
-    async searchWithAppliancesTags(appliances) {
+    async filterWithAppliancesTags(appliances) {
         const appliancesInLowerCase = appliances.map((appliance) =>
             appliance.toLowerCase()
         )
@@ -85,7 +58,7 @@ class App {
         )
     }
 
-    async searchWithUstensilsTags(ustensils) {
+    async filterWithUstensilsTags(ustensils) {
         const ustensilsInLowerCase = ustensils.map((ustensil) =>
             ustensil.toLowerCase()
         )
@@ -99,7 +72,7 @@ class App {
         )
     }
 
-    async searchWithIngredientsTags(ingredients) {
+    async filterWithIngredientsTags(ingredients) {
         const ingredientsInLowerCase = ingredients.map((ingredient) =>
             ingredient.toLowerCase()
         )
@@ -114,14 +87,14 @@ class App {
     }
 
     async search(keyword) {
-        const lowerCaseKeyword = keyword.toLowerCase()
+        this.searchKeyword = keyword.toLowerCase()
         this.recipes = await this.api.getRecipes()
         return this.recipes.filter((recipe) =>
-                recipe.name.toLowerCase().includes(lowerCaseKeyword) ||
-                recipe.description.toLowerCase().includes(lowerCaseKeyword) ||
+                recipe.name.toLowerCase().includes(this.searchKeyword) ||
+                recipe.description.toLowerCase().includes(this.searchKeyword) ||
                 recipe.ingredients
                     .map((ingredient) => ingredient.ingredient.toLowerCase())
-                    .some((ingredient) => ingredient.includes(lowerCaseKeyword))
+                    .some((ingredient) => ingredient.includes(this.searchKeyword))
         )
     }
 
@@ -160,17 +133,29 @@ class App {
         return ingredientsInDropdownMenu
     }
 
+    displayCards(recipes) {
+        if (recipes.length === 0) {
+            const messageIfEmpty = document.createElement('p')
+            messageIfEmpty.classList.add('col-12')
+            messageIfEmpty.textContent = `Il n'y a aucun résultat à votre recherche. Essayez une autre recherche moins précise pour avoir plus de résultats.`
+            this.recipesWrapper.appendChild(messageIfEmpty)
+        } else {
+            recipes.forEach((recipe) => {
+                const recipeCardTemplate = new RecipeCard(recipe)
+                this.recipesWrapper.appendChild(
+                    recipeCardTemplate.createRecipeCard()
+                )
+            })
+        }
+    }
+
     deleteCards() {
         this.recipesWrapper.innerHTML = ''
     }
 
-    displayCards(recipes) {
-        recipes.forEach((recipe) => {
-            const recipeCardTemplate = new RecipeCard(recipe)
-            this.recipesWrapper.appendChild(
-                recipeCardTemplate.createRecipeCard()
-            )
-        })
+    updateCards(recipes) {
+        this.deleteCards()
+        this.displayCards(recipes)
     }
 
     displayAppliancesDropdownMenu(appliancesInDropdownMenu) {
@@ -182,6 +167,21 @@ class App {
         })
     }
 
+    deleteAppliancesDropdownMenu() {
+        this.appliancesWrapper.innerHTML = ''
+    }
+
+    updateAppliancesDropdownMenu() {
+        this.deleteAppliancesDropdownMenu()
+
+        const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+            this.recipes
+        )
+        this.displayAppliancesDropdownMenu(appliancesInDropdownMenu)
+
+        this.createEventsOnAppliancesItems()
+    }
+
     displayUstensilsDropdownMenu(ustensilsInDropdownMenu) {
         ustensilsInDropdownMenu.forEach((ustensil) => {
             const ustensilsTemplate = new UstensilsDropdownMenu(ustensil)
@@ -189,6 +189,21 @@ class App {
                 ustensilsTemplate.createDropdownMenuItem()
             )
         })
+    }
+
+    deleteUstensilsDropdownMenu() {
+        this.ustensilsWrapper.innerHTML = ''
+    }
+
+    updateUstensilsDropdownMenu() {
+        this.deleteUstensilsDropdownMenu()
+
+        const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+            this.recipes
+        )
+        this.displayUstensilsDropdownMenu(ustensilsInDropdownMenu)
+
+        this.createEventsOnUstensilsItems()
     }
 
     displayIngredientsDropdownMenu(ingredientsInDropdownMenu) {
@@ -200,13 +215,45 @@ class App {
         })
     }
 
+    deleteIngredientsDropdownMenu() {
+        this.ingredientsWrapper.innerHTML = ''
+    }
+
+    updateIngredientsDropdownMenu() {
+        this.deleteIngredientsDropdownMenu()
+
+        const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+            this.recipes
+        )
+        this.displayIngredientsDropdownMenu(ingredientsInDropdownMenu)
+
+        this.createEventsOnIngredientsItems()
+    }
+
     createEventsOnSearchBar() {
         const input = document.querySelector('.search .input-group input')
         input.addEventListener('input', async () => {
             if (input.textLength >= 3) {
+                this.searchKeyword = input.value
                 this.deleteCards()
-                this.recipes = await this.search(input.value)
-                this.displayCards(this.recipes)
+                this.recipes = await this.search(this.searchKeyword)
+
+                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                this.updateCards(filteredRecipes)
+
+                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+                    this.recipes
+                )
+                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+                    this.recipes
+                )
+                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+                    this.recipes
+                )
+        
+                this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
+                this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
+                this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             }
         })
     }
@@ -218,29 +265,32 @@ class App {
         const appliancesTagsWrapper = document.getElementById('appliances_tags')
         appliancesItems.forEach((menuItem) => {
             menuItem.addEventListener('click', async () => {
-                // const appliancesTags =
-                //     document.querySelectorAll('.appliance_tag')
-                // console.log(appliancesTags)
-                // const appliances = appliancesTags.map(
-                //     (element) => element.textContent
-                // )
-                const tag = document.createElement('span')
-                tag.classList.add(
-                    'appliance_tag',
-                    'btn',
-                    'mb-3',
-                    'me-3',
-                    'py-2',
-                    'second_color'
-                )
-                tag.innerHTML =
-                    `${menuItem.textContent} ` +
-                    `<i class="fa-regular fa-circle-xmark"></i>`
-                appliancesTagsWrapper.appendChild(tag)
-                // this.deleteCards()
-                // appliances.push(menuItem.textContent)
-                // this.recipes = await this.searchWithAppliancesTags(appliances)
-                // this.displayCards(this.recipes)
+                if (this.appliancesTags.includes(menuItem.textContent)) {
+                    const appliancesTags = Array.from(document.querySelectorAll('.appliance_tag'))
+                    const applianceTagToDelete = appliancesTags.find(applianceTag => applianceTag.textContent === menuItem.textContent + ' ')
+                    applianceTagToDelete.remove()
+
+                    this.appliancesTags = this.appliancesTags.filter(appliance => appliance !== menuItem.textContent)
+                } else {
+                    const tag = document.createElement('span')
+                    tag.classList.add(
+                        'appliance_tag',
+                        'btn',
+                        'mb-3',
+                        'me-3',
+                        'py-2',
+                        'second_color'
+                    )
+                    tag.innerHTML =
+                        `${menuItem.textContent} ` +
+                        `<i class="fa-regular fa-circle-xmark"></i>`
+                    appliancesTagsWrapper.appendChild(tag)
+    
+                    this.appliancesTags.push(menuItem.textContent)
+                }
+                this.recipes = await this.search(this.searchKeyword)
+                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                this.updateCards(filteredRecipes)
             })
         })
     }
@@ -252,19 +302,35 @@ class App {
         const ustensilsTagsWrapper = document.getElementById('ustensils_tags')
         ustensilsItems.forEach((menuItem) => {
             menuItem.addEventListener('click', async () => {
-                const tag = document.createElement('span')
-                tag.classList.add(
-                    'ustensil_tag',
-                    'btn',
-                    'mb-3',
-                    'me-3',
-                    'py-2',
-                    'third_color'
-                )
-                tag.innerHTML =
-                    `${menuItem.textContent} ` +
-                    `<i class="fa-regular fa-circle-xmark"></i>`
-                ustensilsTagsWrapper.appendChild(tag)
+                if (this.ustensilsTags.includes(menuItem.textContent)) {
+                    const ustensilsTags = Array.from(document.querySelectorAll('.ustensil_tag'))
+                    const ustensilTagToDelete = ustensilsTags.find(ustensilTag => ustensilTag.textContent === menuItem.textContent + ' ')
+                    ustensilTagToDelete.remove()
+
+                    this.ustensilsTags = this.ustensilsTags.filter(ustensil => ustensil !== menuItem.textContent)
+                    console.log(this.ustensilsTags)
+                } else {
+                    const tag = document.createElement('span')
+                    tag.classList.add(
+                        'ustensil_tag',
+                        'btn',
+                        'mb-3',
+                        'me-3',
+                        'py-2',
+                        'third_color'
+                    )
+                    tag.innerHTML =
+                        `${menuItem.textContent} ` +
+                        `<i class="fa-regular fa-circle-xmark"></i>`
+                    ustensilsTagsWrapper.appendChild(tag)
+
+                    this.ustensilsTags.push(menuItem.textContent)
+                    console.log(this.ustensilsTags)
+                }
+                this.recipes = await this.search(this.searchKeyword)
+                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                console.log(filteredRecipes);
+                this.updateCards(filteredRecipes)
             })
         })
     }
@@ -277,37 +343,101 @@ class App {
             document.getElementById('ingredients_tags')
         ingredientsItems.forEach((menuItem) => {
             menuItem.addEventListener('click', async () => {
-                const tag = document.createElement('span')
-                tag.classList.add(
-                    'ingredient_tag',
-                    'btn',
-                    'mb-3',
-                    'me-3',
-                    'py-2',
-                    'first_color'
-                )
-                tag.innerHTML =
-                    `${menuItem.textContent} ` +
-                    `<i class="fa-regular fa-circle-xmark"></i>`
-                ingredientsTagsWrapper.appendChild(tag)
+                if (this.ingredientsTags.includes(menuItem.textContent)) {
+                    const ingredientsTags = Array.from(document.querySelectorAll('.ingredient_tag'))
+                    const ingredientTagToDelete = ingredientsTags.find(ingredientTag => ingredientTag.textContent === menuItem.textContent + ' ')
+                    ingredientTagToDelete.remove()
+
+                    this.ingredientsTags = this.ingredientsTags.filter(ingredient => ingredient !== menuItem.textContent)
+                    console.log(this.ingredientsTags)
+                } else {
+                    const tag = document.createElement('span')
+                    tag.classList.add(
+                        'ingredient_tag',
+                        'btn',
+                        'mb-3',
+                        'me-3',
+                        'py-2',
+                        'first_color'
+                    )
+                    tag.innerHTML =
+                        `${menuItem.textContent} ` +
+                        `<i class="fa-regular fa-circle-xmark"></i>`
+                    ingredientsTagsWrapper.appendChild(tag)
+
+                    this.ingredientsTags.push(menuItem.textContent)
+                    console.log(this.ingredientsTags)
+                }
+                this.recipes = await this.search(this.searchKeyword)
+                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                this.updateCards(filteredRecipes)
             })
         })
     }
 
-    // filterByAppliances() {
-    //     const appliancesTagsWrapper = document.getElementById('appliances_tags')
-    //     const appliancesTags = document.querySelectorAll(
-    //         '#appliances_tags span'
-    //     )
-    //     console.log(`wrapper: ${appliancesTagsWrapper}`);
-    //     appliancesTagsWrapper.addEventListener('change', () => {
-    //         console.log('changé');
-    //     })
-        // this.searchWithAppliancesTags(appliancesTags)
-        // this.deleteCards()
-        // this.recipes = this.searchWithAppliancesTags(appliancesTags)
-        // this.displayCards(this.recipes)
-    // }
+    filterByTags(appliances, ustensils, ingredients) {
+        // const appliancesInLowerCase = appliances.map((appliance) =>
+        //     appliance.toLowerCase()
+        // )
+        // const ustensilsInLowerCase = ustensils.map((ustensil) =>
+        //     ustensil.toLowerCase()
+        // )
+        // const ingredientsInLowerCase = ingredients.map((ingredient) =>
+        //     ingredient.toLowerCase()
+        // )
+        let filteredRecipes = this.recipes
+            .filter((recipe) =>
+                appliances.every((appliance) =>
+                    recipe.appliance.includes(appliance)
+                )
+            )
+        filteredRecipes = filteredRecipes
+            .filter((recipe) =>
+                ustensils.every((ustensil) =>
+                    recipe.ustensils
+                        .map((ustensil) => ustensil.includes(ustensil)
+                )
+            ))
+        filteredRecipes = filteredRecipes
+            .filter((recipe) =>
+                ingredients.every((ingredient) =>
+                    recipe.ingredients
+                        .map((recipe) => recipe.ingredient.includes(ingredient)
+                )
+            ))
+        // this.updateCards(filteredRecipes)
+        return filteredRecipes
+    }
+
+    async displayHomePage() {
+        this.recipes = await this.api.getRecipes()
+        const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+            this.recipes
+        )
+        this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
+    
+        const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+            this.recipes
+        )
+        this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
+    
+        const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+            this.recipes
+        )
+        this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
+    
+    
+        this.displayCards(this.recipes)
+        
+    
+        this.createEventsOnSearchBar()
+    }
+    
+    displayErrorPage() {
+        console.log(
+            'Aucune page ne correspond malheureusement à cette adresse.'
+        )
+    }
 }
 
 
@@ -320,18 +450,20 @@ class App {
 // const filteredResults = app.searchWithSearchEngine('coco')
 // console.log(filteredResults)
 
-// app.searchWithAnAppliance('sALA')
-// app.searchWithAnUstensil('écon')
-// app.searchWithAnIngredient('CoCo')
+// app.filterWithAnAppliance('sALA')
+// app.filterWithAnUstensil('écon')
+// app.filterWithAnIngredient('CoCo')
 
-// app.searchWithAppliancesTags(['Four'])
-// app.searchWithAppliancesTags(['Four', 'Saladier'])
-// app.searchWithUstensilsTags(['CouTEAu', 'râpe à FROMAGE'])
-// app.searchWithIngredientsTags(['Lait De CoCo', 'ToMaTe'])
+// app.filterWithAppliancesTags(['Four'])
+// app.filterWithAppliancesTags(['Four', 'Saladier'])
+// app.filterWithUstensilsTags(['CouTEAu', 'râpe à FROMAGE'])
+// app.filterWithIngredientsTags(['Lait De CoCo', 'ToMaTe'])
 
 // (async () => {
 //     const results = await app.searchWithSearchEngine('coc')
 //     console.log(results);})();
+
+
 
 const currentPage = document.location.pathname
 const app = new App()

@@ -29,7 +29,6 @@
         "object-shorthand": "off",
         "class-methods-use-this": "off",
         "no-restricted-syntax": "off",
-        "no-use-before-define": "off",
         "no-prototype-builtins": "off",
         "no-shadow": "off"
     },
