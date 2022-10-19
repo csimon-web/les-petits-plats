@@ -159,60 +159,196 @@ class App {
     }
 
     displayAppliancesDropdownMenu(appliancesInDropdownMenu) {
-        appliancesInDropdownMenu.forEach((appliance) => {
-            const appliancesTemplate = new AppliancesDropdownMenu(appliance)
-            this.appliancesWrapper.appendChild(
-                appliancesTemplate.createDropdownMenuItem()
-            )
-        })
+        if (appliancesInDropdownMenu.length < 10) {
+            appliancesInDropdownMenu.forEach((appliance) => {
+                const appliancesTemplate = new AppliancesDropdownMenu(appliance)
+                this.appliancesWrapper.appendChild(
+                    appliancesTemplate.createDropdownMenuItem()
+                )
+            })
+        } else {
+            const row = document.createElement('div')
+            row.classList.add('row')
+
+            const col1 = document.createElement('div')
+            col1.classList.add('col')
+            for (let i = 0; i <= (appliancesInDropdownMenu.length % 3 !== 0 ? Math.floor(appliancesInDropdownMenu.length / 3) : Math.floor(appliancesInDropdownMenu.length / 3) - 1); i++) {
+                const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
+                col1.appendChild(appliancesTemplate.createDropdownMenuItem())
+            }
+
+            const col2 = document.createElement('div')
+            col2.classList.add('col')
+            for (let i = Math.ceil(appliancesInDropdownMenu.length / 3); i <= (appliancesInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * appliancesInDropdownMenu.length / 3) : Math.floor(2 * appliancesInDropdownMenu.length / 3) - 1); i++) {
+                const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
+                col2.appendChild(appliancesTemplate.createDropdownMenuItem())
+            }
+
+            const col3 = document.createElement('div')
+            col3.classList.add('col')
+            for (let i = Math.ceil(2 * appliancesInDropdownMenu.length / 3); i <= Math.floor(appliancesInDropdownMenu.length); i++) {
+                const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
+                col3.appendChild(appliancesTemplate.createDropdownMenuItem())
+            }
+
+            row.appendChild(col1)
+            row.appendChild(col2)
+            row.appendChild(col3)
+            this.appliancesWrapper.appendChild(row)
+        }
     }
 
     deleteAppliancesDropdownMenu() {
         this.appliancesWrapper.innerHTML = ''
     }
 
-    updateAppliancesDropdownMenu(appliances) {
+    addAppliancesSearchInput(searchedKeyword) {
+        if (searchedKeyword === ('' || null || undefined)) {
+            this.appliancesWrapper.innerHTML += '<form><input type="text" id="appliances_search" class="dropdown-item" placeholder="Rechercher un appareil"></form>'
+        } else {
+            this.appliancesWrapper.innerHTML += `<form><input type="text" id="appliances_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un appareil"></form>`
+        }
+        
+    }
+
+    updateAppliancesDropdownMenu(appliances, searchedKeyword) {
         this.deleteAppliancesDropdownMenu()
+        this.addAppliancesSearchInput(searchedKeyword)
         this.displayAppliancesDropdownMenu(appliances)
+        this.createEventsOnAppliancesSearchInput()
         this.createEventsOnAppliancesItems()
+        const input = document.getElementById('appliances_search')
+        const end = input.value.length
+        input.setSelectionRange(end, end)
+        input.focus()
     }
 
     displayUstensilsDropdownMenu(ustensilsInDropdownMenu) {
-        ustensilsInDropdownMenu.forEach((ustensil) => {
-            const ustensilsTemplate = new UstensilsDropdownMenu(ustensil)
-            this.ustensilsWrapper.appendChild(
-                ustensilsTemplate.createDropdownMenuItem()
-            )
-        })
+        if (ustensilsInDropdownMenu.length < 10) {
+            ustensilsInDropdownMenu.forEach((ustensil) => {
+                const ustensilsTemplate = new UstensilsDropdownMenu(ustensil)
+                this.ustensilsWrapper.appendChild(
+                    ustensilsTemplate.createDropdownMenuItem()
+                )
+            })
+        } else {
+            const row = document.createElement('div')
+            row.classList.add('row')
+
+            const col1 = document.createElement('div')
+            col1.classList.add('col')
+            for (let i = 0; i <= (ustensilsInDropdownMenu.length % 3 !== 0 ? Math.floor(ustensilsInDropdownMenu.length / 3) : Math.floor(ustensilsInDropdownMenu.length / 3) - 1); i++) {
+                const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
+                col1.appendChild(ustensilsTemplate.createDropdownMenuItem())
+            }
+
+            const col2 = document.createElement('div')
+            col2.classList.add('col')
+            for (let i = Math.ceil(ustensilsInDropdownMenu.length / 3); i <= (ustensilsInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * ustensilsInDropdownMenu.length / 3) : Math.floor(2 * ustensilsInDropdownMenu.length / 3) -1); i++) {
+                const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
+                col2.appendChild(ustensilsTemplate.createDropdownMenuItem())
+            }
+
+            const col3 = document.createElement('div')
+            col3.classList.add('col')
+            for (let i = Math.ceil(2 * ustensilsInDropdownMenu.length / 3); i <= Math.floor(ustensilsInDropdownMenu.length); i++) {
+                const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
+                col3.appendChild(ustensilsTemplate.createDropdownMenuItem())
+            }
+
+            row.appendChild(col1)
+            row.appendChild(col2)
+            row.appendChild(col3)
+            this.ustensilsWrapper.appendChild(row)
+        }
     }
 
     deleteUstensilsDropdownMenu() {
         this.ustensilsWrapper.innerHTML = ''
     }
 
-    updateUstensilsDropdownMenu(ustensils) {
+    addUstensilsSearchInput(searchedKeyword) {
+        if (searchedKeyword === ('' || null || undefined)) {
+            this.ustensilsWrapper.innerHTML += '<form><input type="text" id="ustensils_search" class="dropdown-item" placeholder="Rechercher un ustensile"></form>'
+        } else {
+            this.ustensilsWrapper.innerHTML += `<form><input type="text" id="ustensils_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un ustensile"></form>`
+        }
+    }
+
+    updateUstensilsDropdownMenu(ustensils, searchedKeyword) {
         this.deleteUstensilsDropdownMenu()
+        this.addUstensilsSearchInput(searchedKeyword)
         this.displayUstensilsDropdownMenu(ustensils)
+        this.createEventsOnUstensilsSearchInput()
         this.createEventsOnUstensilsItems()
+        const input = document.getElementById('ustensils_search')
+        const end = input.value.length
+        input.setSelectionRange(end, end)
+        input.focus()
     }
 
     displayIngredientsDropdownMenu(ingredientsInDropdownMenu) {
-        ingredientsInDropdownMenu.forEach((ingredient) => {
-            const ingredientsTemplate = new IngredientsDropdownMenu(ingredient)
-            this.ingredientsWrapper.appendChild(
-                ingredientsTemplate.createDropdownMenuItem()
-            )
-        })
+        if (ingredientsInDropdownMenu.length < 10) {
+            ingredientsInDropdownMenu.forEach((ingredient) => {
+                const ingredientsTemplate = new IngredientsDropdownMenu(ingredient)
+                this.ingredientsWrapper.appendChild(
+                    ingredientsTemplate.createDropdownMenuItem()
+                )
+            })
+        } else {
+            const row = document.createElement('div')
+            row.classList.add('row')
+
+            const col1 = document.createElement('div')
+            col1.classList.add('col')
+            for (let i = 0; i <= (ingredientsInDropdownMenu.length % 3 !== 0 ? Math.floor(ingredientsInDropdownMenu.length / 3) : Math.floor(ingredientsInDropdownMenu.length / 3) - 1); i++) {
+                const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
+                col1.appendChild(ingredientsTemplate.createDropdownMenuItem())
+            }
+
+            const col2 = document.createElement('div')
+            col2.classList.add('col')
+            for (let i = Math.ceil(ingredientsInDropdownMenu.length / 3); i <= (ingredientsInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * ingredientsInDropdownMenu.length / 3) : Math.floor(2 * ingredientsInDropdownMenu.length / 3) - 1); i++) {
+                const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
+                col2.appendChild(ingredientsTemplate.createDropdownMenuItem())
+            }
+
+            const col3 = document.createElement('div')
+            col3.classList.add('col')
+            for (let i = Math.ceil(2 * ingredientsInDropdownMenu.length / 3); i <= Math.floor(ingredientsInDropdownMenu.length); i++) {
+                const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
+                col3.appendChild(ingredientsTemplate.createDropdownMenuItem())
+            }
+
+            row.appendChild(col1)
+            row.appendChild(col2)
+            row.appendChild(col3)
+            this.ingredientsWrapper.appendChild(row)
+        }
     }
 
     deleteIngredientsDropdownMenu() {
         this.ingredientsWrapper.innerHTML = ''
     }
 
-    updateIngredientsDropdownMenu(ingredients) {
+    addIngredientsSearchInput(searchedKeyword) {
+        if (searchedKeyword === ('' || null || undefined)) {
+            this.ingredientsWrapper.innerHTML += '<form><input type="text" id="ingredients_search" class="dropdown-item" placeholder="Rechercher un ingrédient"></form>'
+        } else {
+            this.ingredientsWrapper.innerHTML += `<form><input type="text" id="ingredients_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un ingrédient"></form>`
+        }
+    }
+
+    updateIngredientsDropdownMenu(ingredients, searchedKeyword) {
         this.deleteIngredientsDropdownMenu()
+        this.addIngredientsSearchInput(searchedKeyword)
         this.displayIngredientsDropdownMenu(ingredients)
+        this.createEventsOnIngredientsSearchInput()
         this.createEventsOnIngredientsItems()
+        const input = document.getElementById('ingredients_search')
+        const end = input.value.length
+        input.setSelectionRange(end, end)
+        input.focus()
     }
 
     createEventsOnSearchBar() {
@@ -472,6 +608,42 @@ class App {
         })
     }
 
+    createEventsOnAppliancesSearchInput() {
+        const input = document.querySelector('#appliances_dropdown_menu input')
+        input.addEventListener('input', () => {
+            const searchedAppliances = input.value
+            const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+                this.recipes
+            )
+            const filteredAppliances = appliancesInDropdownMenu.filter(appliance => appliance.includes(searchedAppliances))
+            this.updateAppliancesDropdownMenu(filteredAppliances, searchedAppliances)
+        })
+    }
+
+    createEventsOnUstensilsSearchInput() {
+        const input = document.querySelector('#ustensils_dropdown_menu input')
+        input.addEventListener('input', () => {
+            const searchedUstensils = input.value
+            const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+                this.recipes
+            )
+            const filteredUstensils = ustensilsInDropdownMenu.filter(ustensil => ustensil.includes(searchedUstensils))
+            this.updateUstensilsDropdownMenu(filteredUstensils, searchedUstensils)
+        })
+    }
+
+    createEventsOnIngredientsSearchInput() {
+        const input = document.querySelector('#ingredients_dropdown_menu input')
+        input.addEventListener('input', () => {
+            const searchedIngredients = input.value
+            const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+                this.recipes
+            )
+            const filteredIngredients = ingredientsInDropdownMenu.filter(ingredient => ingredient.includes(searchedIngredients))
+            this.updateIngredientsDropdownMenu(filteredIngredients, searchedIngredients)
+        })
+    }
+
     filterByTags(appliances, ustensils, ingredients) {
         return this.recipes
             .filter((recipe) =>
@@ -497,7 +669,7 @@ class App {
         return str
             .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
             .join('-')
-            .toLowerCase();
+            .toLowerCase()
     }
 
     async displayHomePage() {

@@ -12,7 +12,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Petitsplats Screenshot][product-screenshot]](https://example.com)
 
 Here you can describe the project, why you made it and **for who you made it**, but mostly don't forget to add a screenshot like the image above AND a link to the demo like this : https://NicolasBrondin.github.io/basic-readme-template/
 
@@ -66,7 +66,7 @@ Project Link: [https://github.com/christophe-simon/petitsplats](https://github.c
 ## Acknowledgements
 
 - This readme version is a simplified version of this [github repository](https://github.com/othneildrew/Best-README-Template) by Othneildrew
-- This readme version is a customized version of this [github repository](https://github.com/christophe-simon/petitsplats) by NicolasBrondin
+- This readme version is a customized version of this [github repository](https://github.com/NicolasBrondin/basic-readme-template) by NicolasBrondin
 
 
 
@@ -84,4 +84,4 @@ Project Link: [https://github.com/christophe-simon/petitsplats](https://github.c
 [issues-url]: https://github.com/christophe-simon/petitsplats/issues
 [license-shield]: https://img.shields.io/github/license/christophe-simon/petitsplats.svg?style=flat-square
 [license-url]: https://github.com/christophe-simon/petitsplats/blob/master/LICENSE.txt
-[product-screenshot]: docs/cover.jpg
+[product-screenshot]: docs/screenshot.jpg
