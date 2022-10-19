@@ -67,6 +67,17 @@ body {
     background: #ED6454;
 }
 
+#ingredients_dropdown_menu,
+#appliances_dropdown_menu,
+#ustensils_dropdown_menu {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    max-height: 400px;
+    overflow-y: scroll;
+    transform: translate3d(0, 0, 0)
+}
+
 #ingredients_dropdown_menu {
     background: #3282F7;
 }
