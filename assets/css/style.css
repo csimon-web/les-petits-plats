@@ -36,11 +36,21 @@ body {
     border: unset;
 }
 
-.ingredient_tag, .appliance_tag, .ustensil_tag {
+.ingredient_tag,
+.appliance_tag,
+.ustensil_tag {
     display: inline-block;
 }
 
-.ingredient_tag, .appliance_tag, .ustensil_tag, .ingredient_tag:hover, .appliance_tag:hover, .ustensil_tag:hover, .ingredient_tag:focus, .appliance_tag:focus, .ustensil_tag:focus  {
+.ingredient_tag,
+.appliance_tag,
+.ustensil_tag,
+.ingredient_tag:hover,
+.appliance_tag:hover,
+.ustensil_tag:hover,
+.ingredient_tag:focus,
+.appliance_tag:focus,
+.ustensil_tag:focus  {
     color: #FFF;
 }
 
@@ -55,27 +65,40 @@ body {
     color: #FFF;
 }
 
-.ingredient_tag:hover, .btn.dropdown-toggle.first_color:hover, .btn.dropdown-toggle.first_color:focus, .first_color {
+.ingredient_tag:hover,
+.btn.dropdown-toggle.first_color:hover,
+.btn.dropdown-toggle.first_color:focus,
+.btn.dropdown-toggle.first_color.show,
+.first_color {
     background: #3282F7;
 }
 
-.appliance_tag:hover, .btn.dropdown-toggle.second_color:hover, .btn.dropdown-toggle.second_color:focus, .second_color {
+.appliance_tag:hover,
+.btn.dropdown-toggle.second_color:hover,
+.btn.dropdown-toggle.second_color:focus,
+.btn.dropdown-toggle.second_color.show,
+.second_color {
     background: #68D9A4;
 }
 
-.ustensil_tag:hover, .btn.dropdown-toggle.third_color:hover, .btn.dropdown-toggle.third_color:focus, .third_color {
+.ustensil_tag:hover,
+.btn.dropdown-toggle.third_color:hover,
+.btn.dropdown-toggle.third_color:focus,
+.btn.dropdown-toggle.third_color.show,
+.third_color {
     background: #ED6454;
 }
 
 #ingredients_dropdown_menu,
 #appliances_dropdown_menu,
 #ustensils_dropdown_menu {
-    position: absolute;
-    left: 0;
-    top: 50px;
-    max-height: 400px;
+    /* position: absolute; */
+    /* left: 0;
+    top: 50px; */
+    max-height: 300px;
+    min-width: 300px;
+    overflow-x: hidden;
     overflow-y: scroll;
-    transform: translate3d(0, 0, 0)
 }
 
 #ingredients_dropdown_menu {
@@ -89,10 +112,20 @@ body {
 #ustensils_dropdown_menu {
     background: #ED6454;
 }
-  
-#ingredients_dropdown_menu .row, #appliances_dropdown_menu .row, #ustensils_dropdown_menu .row {
-    flex-flow: nowrap;
-}
+
+@media screen and (min-width: 768px) {
+    #ingredients_dropdown_menu,
+    #appliances_dropdown_menu,
+    #ustensils_dropdown_menu {
+        max-height: 400px;
+    }
+
+    #ingredients_dropdown_menu .row,
+    #appliances_dropdown_menu .row,
+    #ustensils_dropdown_menu .row {
+        flex-flow: nowrap;
+    }
+  }
 
 #ingredients_dropdown_menu .dropdown-item,
 #appliances_dropdown_menu .dropdown-item,

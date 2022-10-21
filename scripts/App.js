@@ -171,21 +171,21 @@ class App {
             row.classList.add('row')
 
             const col1 = document.createElement('div')
-            col1.classList.add('col')
+            col1.classList.add('col-12', 'col-md-4')
             for (let i = 0; i <= (appliancesInDropdownMenu.length % 3 !== 0 ? Math.floor(appliancesInDropdownMenu.length / 3) : Math.floor(appliancesInDropdownMenu.length / 3) - 1); i++) {
                 const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
                 col1.appendChild(appliancesTemplate.createDropdownMenuItem())
             }
 
             const col2 = document.createElement('div')
-            col2.classList.add('col')
+            col2.classList.add('col-12', 'col-md-4')
             for (let i = Math.ceil(appliancesInDropdownMenu.length / 3); i <= (appliancesInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * appliancesInDropdownMenu.length / 3) : Math.floor(2 * appliancesInDropdownMenu.length / 3) - 1); i++) {
                 const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
                 col2.appendChild(appliancesTemplate.createDropdownMenuItem())
             }
 
             const col3 = document.createElement('div')
-            col3.classList.add('col')
+            col3.classList.add('col-12', 'col-md-4')
             for (let i = Math.ceil(2 * appliancesInDropdownMenu.length / 3); i <= Math.floor(appliancesInDropdownMenu.length); i++) {
                 const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
                 col3.appendChild(appliancesTemplate.createDropdownMenuItem())
@@ -236,21 +236,21 @@ class App {
             row.classList.add('row')
 
             const col1 = document.createElement('div')
-            col1.classList.add('col')
+            col1.classList.add('col-12', 'col-md-4')
             for (let i = 0; i <= (ustensilsInDropdownMenu.length % 3 !== 0 ? Math.floor(ustensilsInDropdownMenu.length / 3) : Math.floor(ustensilsInDropdownMenu.length / 3) - 1); i++) {
                 const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
                 col1.appendChild(ustensilsTemplate.createDropdownMenuItem())
             }
 
             const col2 = document.createElement('div')
-            col2.classList.add('col')
+            col2.classList.add('col-12', 'col-md-4')
             for (let i = Math.ceil(ustensilsInDropdownMenu.length / 3); i <= (ustensilsInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * ustensilsInDropdownMenu.length / 3) : Math.floor(2 * ustensilsInDropdownMenu.length / 3) -1); i++) {
                 const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
                 col2.appendChild(ustensilsTemplate.createDropdownMenuItem())
             }
 
             const col3 = document.createElement('div')
-            col3.classList.add('col')
+            col3.classList.add('col-12', 'col-md-4')
             for (let i = Math.ceil(2 * ustensilsInDropdownMenu.length / 3); i <= Math.floor(ustensilsInDropdownMenu.length); i++) {
                 const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
                 col3.appendChild(ustensilsTemplate.createDropdownMenuItem())
@@ -300,21 +300,21 @@ class App {
             row.classList.add('row')
 
             const col1 = document.createElement('div')
-            col1.classList.add('col')
+            col1.classList.add('col-12', 'col-md-4')
             for (let i = 0; i <= (ingredientsInDropdownMenu.length % 3 !== 0 ? Math.floor(ingredientsInDropdownMenu.length / 3) : Math.floor(ingredientsInDropdownMenu.length / 3) - 1); i++) {
                 const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
                 col1.appendChild(ingredientsTemplate.createDropdownMenuItem())
             }
 
             const col2 = document.createElement('div')
-            col2.classList.add('col')
+            col2.classList.add('col-12', 'col-md-4')
             for (let i = Math.ceil(ingredientsInDropdownMenu.length / 3); i <= (ingredientsInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * ingredientsInDropdownMenu.length / 3) : Math.floor(2 * ingredientsInDropdownMenu.length / 3) - 1); i++) {
                 const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
                 col2.appendChild(ingredientsTemplate.createDropdownMenuItem())
             }
 
             const col3 = document.createElement('div')
-            col3.classList.add('col')
+            col3.classList.add('col-12', 'col-md-4')
             for (let i = Math.ceil(2 * ingredientsInDropdownMenu.length / 3); i <= Math.floor(ingredientsInDropdownMenu.length); i++) {
                 const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
                 col3.appendChild(ingredientsTemplate.createDropdownMenuItem())
@@ -356,11 +356,27 @@ class App {
         input.addEventListener('input', async () => {
             if (input.textLength >= 3) {
                 this.searchKeyword = input.value
-                this.deleteCards()
                 this.recipes = await this.search(this.searchKeyword)
-
                 const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
                 this.updateCards(filteredRecipes)
+
+                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+                    this.recipes
+                )
+                this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
+
+                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+                    this.recipes
+                )
+                this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
+
+                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+                    this.recipes
+                )
+                this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
+            } else {
+                this.recipes = await this.api.getRecipes()
+                this.updateCards(this.recipes)
 
                 const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
                     this.recipes
