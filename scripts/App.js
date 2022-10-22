@@ -628,11 +628,28 @@ class App {
         const input = document.querySelector('#appliances_dropdown_menu input')
         input.addEventListener('input', () => {
             const searchedAppliances = input.value
-            const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                this.recipes
-            )
-            const filteredAppliances = appliancesInDropdownMenu.filter(appliance => appliance.includes(searchedAppliances))
-            this.updateAppliancesDropdownMenu(filteredAppliances, searchedAppliances)
+            if (searchedAppliances !== '') {
+                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+                    this.recipes
+                )
+                const filteredAppliances = appliancesInDropdownMenu.filter(appliance => appliance.includes(searchedAppliances))
+                this.updateAppliancesDropdownMenu(filteredAppliances, searchedAppliances)
+            } else {
+                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                this.updateCards(filteredRecipes)
+                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+                    filteredRecipes
+                )
+                this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
+                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+                    filteredRecipes
+                )
+                this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
+                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+                    filteredRecipes
+                )
+                this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
+            }
         })
     }
 
@@ -640,11 +657,28 @@ class App {
         const input = document.querySelector('#ustensils_dropdown_menu input')
         input.addEventListener('input', () => {
             const searchedUstensils = input.value
-            const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                this.recipes
-            )
-            const filteredUstensils = ustensilsInDropdownMenu.filter(ustensil => ustensil.includes(searchedUstensils))
-            this.updateUstensilsDropdownMenu(filteredUstensils, searchedUstensils)
+            if (searchedUstensils !== '') {
+                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+                    this.recipes
+                )
+                const filteredUstensils = ustensilsInDropdownMenu.filter(ustensil => ustensil.includes(searchedUstensils))
+                this.updateUstensilsDropdownMenu(filteredUstensils, searchedUstensils)
+            } else {
+                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                this.updateCards(filteredRecipes)
+                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+                    filteredRecipes
+                )
+                this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
+                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+                    filteredRecipes
+                )
+                this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
+                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+                    filteredRecipes
+                )
+                this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
+            }
         })
     }
 
@@ -652,11 +686,28 @@ class App {
         const input = document.querySelector('#ingredients_dropdown_menu input')
         input.addEventListener('input', () => {
             const searchedIngredients = input.value
-            const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                this.recipes
-            )
-            const filteredIngredients = ingredientsInDropdownMenu.filter(ingredient => ingredient.includes(searchedIngredients))
-            this.updateIngredientsDropdownMenu(filteredIngredients, searchedIngredients)
+            if (searchedIngredients !== '') {
+                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+                    this.recipes
+                )
+                const filteredIngredients = ingredientsInDropdownMenu.filter(ingredient => ingredient.includes(searchedIngredients))
+                this.updateIngredientsDropdownMenu(filteredIngredients, searchedIngredients)
+            } else {
+                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                this.updateCards(filteredRecipes)
+                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
+                    filteredRecipes
+                )
+                this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
+                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
+                    filteredRecipes
+                )
+                this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
+                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
+                    filteredRecipes
+                )
+                this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
+            }
         })
     }
 
