@@ -89,12 +89,15 @@ class App {
     async search(keyword) {
         this.searchKeyword = keyword.toLowerCase()
         this.recipes = await this.api.getRecipes()
-        return this.recipes.filter((recipe) =>
+        return this.recipes.filter(
+            (recipe) =>
                 recipe.name.toLowerCase().includes(this.searchKeyword) ||
                 recipe.description.toLowerCase().includes(this.searchKeyword) ||
                 recipe.ingredients
                     .map((ingredient) => ingredient.ingredient.toLowerCase())
-                    .some((ingredient) => ingredient.includes(this.searchKeyword))
+                    .some((ingredient) =>
+                        ingredient.includes(this.searchKeyword)
+                    )
         )
     }
 
@@ -172,22 +175,47 @@ class App {
 
             const col1 = document.createElement('div')
             col1.classList.add('col-12', 'col-md-4')
-            for (let i = 0; i <= (appliancesInDropdownMenu.length % 3 !== 0 ? Math.floor(appliancesInDropdownMenu.length / 3) : Math.floor(appliancesInDropdownMenu.length / 3) - 1); i++) {
-                const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
+            for (
+                let i = 0;
+                i <=
+                (appliancesInDropdownMenu.length % 3 !== 0
+                    ? Math.floor(appliancesInDropdownMenu.length / 3)
+                    : Math.floor(appliancesInDropdownMenu.length / 3) - 1);
+                i++
+            ) {
+                const appliancesTemplate = new AppliancesDropdownMenu(
+                    appliancesInDropdownMenu[i]
+                )
                 col1.appendChild(appliancesTemplate.createDropdownMenuItem())
             }
 
             const col2 = document.createElement('div')
             col2.classList.add('col-12', 'col-md-4')
-            for (let i = Math.ceil(appliancesInDropdownMenu.length / 3); i <= (appliancesInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * appliancesInDropdownMenu.length / 3) : Math.floor(2 * appliancesInDropdownMenu.length / 3) - 1); i++) {
-                const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
+            for (
+                let i = Math.ceil(appliancesInDropdownMenu.length / 3);
+                i <=
+                (appliancesInDropdownMenu.length % 3 !== 0
+                    ? Math.floor((2 * appliancesInDropdownMenu.length) / 3)
+                    : Math.floor((2 * appliancesInDropdownMenu.length) / 3) -
+                      1);
+                i++
+            ) {
+                const appliancesTemplate = new AppliancesDropdownMenu(
+                    appliancesInDropdownMenu[i]
+                )
                 col2.appendChild(appliancesTemplate.createDropdownMenuItem())
             }
 
             const col3 = document.createElement('div')
             col3.classList.add('col-12', 'col-md-4')
-            for (let i = Math.ceil(2 * appliancesInDropdownMenu.length / 3); i <= Math.floor(appliancesInDropdownMenu.length); i++) {
-                const appliancesTemplate = new AppliancesDropdownMenu(appliancesInDropdownMenu[i])
+            for (
+                let i = Math.ceil((2 * appliancesInDropdownMenu.length) / 3);
+                i <= Math.floor(appliancesInDropdownMenu.length);
+                i++
+            ) {
+                const appliancesTemplate = new AppliancesDropdownMenu(
+                    appliancesInDropdownMenu[i]
+                )
                 col3.appendChild(appliancesTemplate.createDropdownMenuItem())
             }
 
@@ -204,11 +232,11 @@ class App {
 
     addAppliancesSearchInput(searchedKeyword) {
         if (searchedKeyword === ('' || null || undefined)) {
-            this.appliancesWrapper.innerHTML += '<form><input type="text" id="appliances_search" class="dropdown-item" placeholder="Rechercher un appareil"></form>'
+            this.appliancesWrapper.innerHTML +=
+                '<input type="text" id="appliances_search" class="dropdown-item" placeholder="Rechercher un appareil">'
         } else {
-            this.appliancesWrapper.innerHTML += `<form><input type="text" id="appliances_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un appareil"></form>`
+            this.appliancesWrapper.innerHTML += `<input type="text" id="appliances_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un appareil">`
         }
-        
     }
 
     updateAppliancesDropdownMenu(appliances, searchedKeyword) {
@@ -237,22 +265,46 @@ class App {
 
             const col1 = document.createElement('div')
             col1.classList.add('col-12', 'col-md-4')
-            for (let i = 0; i <= (ustensilsInDropdownMenu.length % 3 !== 0 ? Math.floor(ustensilsInDropdownMenu.length / 3) : Math.floor(ustensilsInDropdownMenu.length / 3) - 1); i++) {
-                const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
+            for (
+                let i = 0;
+                i <=
+                (ustensilsInDropdownMenu.length % 3 !== 0
+                    ? Math.floor(ustensilsInDropdownMenu.length / 3)
+                    : Math.floor(ustensilsInDropdownMenu.length / 3) - 1);
+                i++
+            ) {
+                const ustensilsTemplate = new UstensilsDropdownMenu(
+                    ustensilsInDropdownMenu[i]
+                )
                 col1.appendChild(ustensilsTemplate.createDropdownMenuItem())
             }
 
             const col2 = document.createElement('div')
             col2.classList.add('col-12', 'col-md-4')
-            for (let i = Math.ceil(ustensilsInDropdownMenu.length / 3); i <= (ustensilsInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * ustensilsInDropdownMenu.length / 3) : Math.floor(2 * ustensilsInDropdownMenu.length / 3) -1); i++) {
-                const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
+            for (
+                let i = Math.ceil(ustensilsInDropdownMenu.length / 3);
+                i <=
+                (ustensilsInDropdownMenu.length % 3 !== 0
+                    ? Math.floor((2 * ustensilsInDropdownMenu.length) / 3)
+                    : Math.floor((2 * ustensilsInDropdownMenu.length) / 3) - 1);
+                i++
+            ) {
+                const ustensilsTemplate = new UstensilsDropdownMenu(
+                    ustensilsInDropdownMenu[i]
+                )
                 col2.appendChild(ustensilsTemplate.createDropdownMenuItem())
             }
 
             const col3 = document.createElement('div')
             col3.classList.add('col-12', 'col-md-4')
-            for (let i = Math.ceil(2 * ustensilsInDropdownMenu.length / 3); i <= Math.floor(ustensilsInDropdownMenu.length); i++) {
-                const ustensilsTemplate = new UstensilsDropdownMenu(ustensilsInDropdownMenu[i])
+            for (
+                let i = Math.ceil((2 * ustensilsInDropdownMenu.length) / 3);
+                i <= Math.floor(ustensilsInDropdownMenu.length);
+                i++
+            ) {
+                const ustensilsTemplate = new UstensilsDropdownMenu(
+                    ustensilsInDropdownMenu[i]
+                )
                 col3.appendChild(ustensilsTemplate.createDropdownMenuItem())
             }
 
@@ -269,9 +321,10 @@ class App {
 
     addUstensilsSearchInput(searchedKeyword) {
         if (searchedKeyword === ('' || null || undefined)) {
-            this.ustensilsWrapper.innerHTML += '<form><input type="text" id="ustensils_search" class="dropdown-item" placeholder="Rechercher un ustensile"></form>'
+            this.ustensilsWrapper.innerHTML +=
+                '<input type="text" id="ustensils_search" class="dropdown-item" placeholder="Rechercher un ustensile">'
         } else {
-            this.ustensilsWrapper.innerHTML += `<form><input type="text" id="ustensils_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un ustensile"></form>`
+            this.ustensilsWrapper.innerHTML += `<input type="text" id="ustensils_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un ustensile">`
         }
     }
 
@@ -290,7 +343,9 @@ class App {
     displayIngredientsDropdownMenu(ingredientsInDropdownMenu) {
         if (ingredientsInDropdownMenu.length < 10) {
             ingredientsInDropdownMenu.forEach((ingredient) => {
-                const ingredientsTemplate = new IngredientsDropdownMenu(ingredient)
+                const ingredientsTemplate = new IngredientsDropdownMenu(
+                    ingredient
+                )
                 this.ingredientsWrapper.appendChild(
                     ingredientsTemplate.createDropdownMenuItem()
                 )
@@ -301,22 +356,47 @@ class App {
 
             const col1 = document.createElement('div')
             col1.classList.add('col-12', 'col-md-4')
-            for (let i = 0; i <= (ingredientsInDropdownMenu.length % 3 !== 0 ? Math.floor(ingredientsInDropdownMenu.length / 3) : Math.floor(ingredientsInDropdownMenu.length / 3) - 1); i++) {
-                const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
+            for (
+                let i = 0;
+                i <=
+                (ingredientsInDropdownMenu.length % 3 !== 0
+                    ? Math.floor(ingredientsInDropdownMenu.length / 3)
+                    : Math.floor(ingredientsInDropdownMenu.length / 3) - 1);
+                i++
+            ) {
+                const ingredientsTemplate = new IngredientsDropdownMenu(
+                    ingredientsInDropdownMenu[i]
+                )
                 col1.appendChild(ingredientsTemplate.createDropdownMenuItem())
             }
 
             const col2 = document.createElement('div')
             col2.classList.add('col-12', 'col-md-4')
-            for (let i = Math.ceil(ingredientsInDropdownMenu.length / 3); i <= (ingredientsInDropdownMenu.length % 3 !== 0 ? Math.floor(2 * ingredientsInDropdownMenu.length / 3) : Math.floor(2 * ingredientsInDropdownMenu.length / 3) - 1); i++) {
-                const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
+            for (
+                let i = Math.ceil(ingredientsInDropdownMenu.length / 3);
+                i <=
+                (ingredientsInDropdownMenu.length % 3 !== 0
+                    ? Math.floor((2 * ingredientsInDropdownMenu.length) / 3)
+                    : Math.floor((2 * ingredientsInDropdownMenu.length) / 3) -
+                      1);
+                i++
+            ) {
+                const ingredientsTemplate = new IngredientsDropdownMenu(
+                    ingredientsInDropdownMenu[i]
+                )
                 col2.appendChild(ingredientsTemplate.createDropdownMenuItem())
             }
 
             const col3 = document.createElement('div')
             col3.classList.add('col-12', 'col-md-4')
-            for (let i = Math.ceil(2 * ingredientsInDropdownMenu.length / 3); i <= Math.floor(ingredientsInDropdownMenu.length); i++) {
-                const ingredientsTemplate = new IngredientsDropdownMenu(ingredientsInDropdownMenu[i])
+            for (
+                let i = Math.ceil((2 * ingredientsInDropdownMenu.length) / 3);
+                i <= Math.floor(ingredientsInDropdownMenu.length);
+                i++
+            ) {
+                const ingredientsTemplate = new IngredientsDropdownMenu(
+                    ingredientsInDropdownMenu[i]
+                )
                 col3.appendChild(ingredientsTemplate.createDropdownMenuItem())
             }
 
@@ -333,9 +413,10 @@ class App {
 
     addIngredientsSearchInput(searchedKeyword) {
         if (searchedKeyword === ('' || null || undefined)) {
-            this.ingredientsWrapper.innerHTML += '<form><input type="text" id="ingredients_search" class="dropdown-item" placeholder="Rechercher un ingrédient"></form>'
+            this.ingredientsWrapper.innerHTML +=
+                '<input type="text" id="ingredients_search" class="dropdown-item" placeholder="Rechercher un ingrédient">'
         } else {
-            this.ingredientsWrapper.innerHTML += `<form><input type="text" id="ingredients_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un ingrédient"></form>`
+            this.ingredientsWrapper.innerHTML += `<input type="text" id="ingredients_search" class="dropdown-item" value="${searchedKeyword}" placeholder="Rechercher un ingrédient">`
         }
     }
 
@@ -353,11 +434,16 @@ class App {
 
     createEventsOnSearchBar() {
         const input = document.querySelector('.search .input-group input')
-        input.addEventListener('input', async () => {
-            if (input.textLength >= 3) {
-                this.searchKeyword = input.value
+        input.addEventListener('input', async (event) => {
+            const searchKeyword = event.target.value
+            if (searchKeyword.length >= 3) {
+                this.searchKeyword = searchKeyword
                 this.recipes = await this.search(this.searchKeyword)
-                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
+                )
                 this.updateCards(filteredRecipes)
 
                 const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
@@ -370,9 +456,8 @@ class App {
                 )
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
 
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    this.recipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(this.recipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             } else {
                 this.recipes = await this.api.getRecipes()
@@ -388,9 +473,8 @@ class App {
                 )
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
 
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    this.recipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(this.recipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             }
         })
@@ -404,11 +488,19 @@ class App {
         appliancesItems.forEach((menuItem) => {
             menuItem.addEventListener('click', async () => {
                 if (this.appliancesTags.includes(menuItem.textContent)) {
-                    const appliancesTags = Array.from(document.querySelectorAll('.appliance_tag'))
-                    const applianceTagToDelete = appliancesTags.find(applianceTag => applianceTag.textContent === menuItem.textContent + ' ')
+                    const appliancesTags = Array.from(
+                        document.querySelectorAll('.appliance_tag')
+                    )
+                    const applianceTagToDelete = appliancesTags.find(
+                        (applianceTag) =>
+                            applianceTag.textContent ===
+                            `${menuItem.textContent} `
+                    )
                     applianceTagToDelete.remove()
 
-                    this.appliancesTags = this.appliancesTags.filter(appliance => appliance !== menuItem.textContent)
+                    this.appliancesTags = this.appliancesTags.filter(
+                        (appliance) => appliance !== menuItem.textContent
+                    )
                 } else {
                     const tag = document.createElement('span')
                     tag.classList.add(
@@ -421,51 +513,65 @@ class App {
                     )
                     tag.innerHTML =
                         `${menuItem.textContent} ` +
-                        `<i class="fa-regular fa-circle-xmark ${this.toKebabCase(menuItem.textContent)}"></i>`
+                        `<i class="fa-regular fa-circle-xmark ${this.toKebabCase(
+                            menuItem.textContent
+                        )}"></i>`
                     appliancesTagsWrapper.appendChild(tag)
 
-                    const closeButton = document.querySelector(`.fa-regular.${this.toKebabCase(menuItem.textContent)}`)
+                    const closeButton = document.querySelector(
+                        `.fa-regular.${this.toKebabCase(menuItem.textContent)}`
+                    )
                     closeButton.addEventListener('click', () => {
                         const applianceTagToDelete = closeButton.parentElement
                         applianceTagToDelete.remove()
-                        this.appliancesTags = this.appliancesTags.filter(appliance => appliance !== menuItem.textContent)
-                        const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                        this.appliancesTags = this.appliancesTags.filter(
+                            (appliance) => appliance !== menuItem.textContent
+                        )
+                        const filteredRecipes = this.filterByTags(
+                            this.appliancesTags,
+                            this.ustensilsTags,
+                            this.ingredientsTags
+                        )
                         this.updateCards(filteredRecipes)
-                        const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                            filteredRecipes
+                        const appliancesInDropdownMenu =
+                            this.getAppliancesFromRecipes(filteredRecipes)
+                        this.updateAppliancesDropdownMenu(
+                            appliancesInDropdownMenu
                         )
-                        this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
-                        const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                            filteredRecipes
+                        const ustensilsInDropdownMenu =
+                            this.getUstensilsFromRecipes(filteredRecipes)
+                        this.updateUstensilsDropdownMenu(
+                            ustensilsInDropdownMenu
                         )
-                        this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
-                        const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                            filteredRecipes
+                        const ingredientsInDropdownMenu =
+                            this.getIngredientsFromRecipes(filteredRecipes)
+                        this.updateIngredientsDropdownMenu(
+                            ingredientsInDropdownMenu
                         )
-                        this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
                     })
-    
+
                     this.appliancesTags.push(menuItem.textContent)
                     console.log(this.appliancesTags)
                 }
                 this.recipes = await this.search(this.searchKeyword)
-                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
+                )
                 console.log(filteredRecipes)
                 this.updateCards(filteredRecipes)
 
-                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                    filteredRecipes
-                )
+                const appliancesInDropdownMenu =
+                    this.getAppliancesFromRecipes(filteredRecipes)
                 this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
 
-                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                    filteredRecipes
-                )
+                const ustensilsInDropdownMenu =
+                    this.getUstensilsFromRecipes(filteredRecipes)
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
 
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    filteredRecipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(filteredRecipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             })
         })
@@ -479,11 +585,19 @@ class App {
         ustensilsItems.forEach((menuItem) => {
             menuItem.addEventListener('click', async () => {
                 if (this.ustensilsTags.includes(menuItem.textContent)) {
-                    const ustensilsTags = Array.from(document.querySelectorAll('.ustensil_tag'))
-                    const ustensilTagToDelete = ustensilsTags.find(ustensilTag => ustensilTag.textContent === menuItem.textContent + ' ')
+                    const ustensilsTags = Array.from(
+                        document.querySelectorAll('.ustensil_tag')
+                    )
+                    const ustensilTagToDelete = ustensilsTags.find(
+                        (ustensilTag) =>
+                            ustensilTag.textContent ===
+                            `${menuItem.textContent} `
+                    )
                     ustensilTagToDelete.remove()
 
-                    this.ustensilsTags = this.ustensilsTags.filter(ustensil => ustensil !== menuItem.textContent)
+                    this.ustensilsTags = this.ustensilsTags.filter(
+                        (ustensil) => ustensil !== menuItem.textContent
+                    )
                     console.log(this.ustensilsTags)
                 } else {
                     const tag = document.createElement('span')
@@ -497,51 +611,65 @@ class App {
                     )
                     tag.innerHTML =
                         `${menuItem.textContent} ` +
-                        `<i class="fa-regular fa-circle-xmark ${this.toKebabCase(menuItem.textContent)}"></i>`
+                        `<i class="fa-regular fa-circle-xmark ${this.toKebabCase(
+                            menuItem.textContent
+                        )}"></i>`
                     ustensilsTagsWrapper.appendChild(tag)
 
-                    const closeButton = document.querySelector(`.fa-regular.${this.toKebabCase(menuItem.textContent)}`)
+                    const closeButton = document.querySelector(
+                        `.fa-regular.${this.toKebabCase(menuItem.textContent)}`
+                    )
                     closeButton.addEventListener('click', () => {
                         const ustensilTagToDelete = closeButton.parentElement
                         ustensilTagToDelete.remove()
-                        this.ustensilsTags = this.ustensilsTags.filter(ustensil => ustensil !== menuItem.textContent)
-                        const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                        this.ustensilsTags = this.ustensilsTags.filter(
+                            (ustensil) => ustensil !== menuItem.textContent
+                        )
+                        const filteredRecipes = this.filterByTags(
+                            this.appliancesTags,
+                            this.ustensilsTags,
+                            this.ingredientsTags
+                        )
                         this.updateCards(filteredRecipes)
-                        const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                            filteredRecipes
+                        const appliancesInDropdownMenu =
+                            this.getAppliancesFromRecipes(filteredRecipes)
+                        this.updateAppliancesDropdownMenu(
+                            appliancesInDropdownMenu
                         )
-                        this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
-                        const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                            filteredRecipes
+                        const ustensilsInDropdownMenu =
+                            this.getUstensilsFromRecipes(filteredRecipes)
+                        this.updateUstensilsDropdownMenu(
+                            ustensilsInDropdownMenu
                         )
-                        this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
-                        const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                            filteredRecipes
+                        const ingredientsInDropdownMenu =
+                            this.getIngredientsFromRecipes(filteredRecipes)
+                        this.updateIngredientsDropdownMenu(
+                            ingredientsInDropdownMenu
                         )
-                        this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
                     })
 
                     this.ustensilsTags.push(menuItem.textContent)
                     console.log(this.ustensilsTags)
                 }
                 this.recipes = await this.search(this.searchKeyword)
-                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
+                )
                 console.log(filteredRecipes)
                 this.updateCards(filteredRecipes)
 
-                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                    filteredRecipes
-                )
+                const appliancesInDropdownMenu =
+                    this.getAppliancesFromRecipes(filteredRecipes)
                 this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
 
-                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                    filteredRecipes
-                )
+                const ustensilsInDropdownMenu =
+                    this.getUstensilsFromRecipes(filteredRecipes)
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
 
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    filteredRecipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(filteredRecipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             })
         })
@@ -556,11 +684,19 @@ class App {
         ingredientsItems.forEach((menuItem) => {
             menuItem.addEventListener('click', async () => {
                 if (this.ingredientsTags.includes(menuItem.textContent)) {
-                    const ingredientsTags = Array.from(document.querySelectorAll('.ingredient_tag'))
-                    const ingredientTagToDelete = ingredientsTags.find(ingredientTag => ingredientTag.textContent === menuItem.textContent + ' ')
+                    const ingredientsTags = Array.from(
+                        document.querySelectorAll('.ingredient_tag')
+                    )
+                    const ingredientTagToDelete = ingredientsTags.find(
+                        (ingredientTag) =>
+                            ingredientTag.textContent ===
+                            `${menuItem.textContent} `
+                    )
                     ingredientTagToDelete.remove()
 
-                    this.ingredientsTags = this.ingredientsTags.filter(ingredient => ingredient !== menuItem.textContent)
+                    this.ingredientsTags = this.ingredientsTags.filter(
+                        (ingredient) => ingredient !== menuItem.textContent
+                    )
                     console.log(this.ingredientsTags)
                 } else {
                     const tag = document.createElement('span')
@@ -574,51 +710,65 @@ class App {
                     )
                     tag.innerHTML =
                         `${menuItem.textContent} ` +
-                        `<i class="fa-regular fa-circle-xmark ${this.toKebabCase(menuItem.textContent)}"></i>`
+                        `<i class="fa-regular fa-circle-xmark ${this.toKebabCase(
+                            menuItem.textContent
+                        )}"></i>`
                     ingredientsTagsWrapper.appendChild(tag)
 
-                    const closeButton = document.querySelector(`.fa-regular.${this.toKebabCase(menuItem.textContent)}`)
+                    const closeButton = document.querySelector(
+                        `.fa-regular.${this.toKebabCase(menuItem.textContent)}`
+                    )
                     closeButton.addEventListener('click', () => {
                         const ingredientTagToDelete = closeButton.parentElement
                         ingredientTagToDelete.remove()
-                        this.ingredientsTags = this.ingredientsTags.filter(ingredient => ingredient !== menuItem.textContent)
-                        const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                        this.ingredientsTags = this.ingredientsTags.filter(
+                            (ingredient) => ingredient !== menuItem.textContent
+                        )
+                        const filteredRecipes = this.filterByTags(
+                            this.appliancesTags,
+                            this.ustensilsTags,
+                            this.ingredientsTags
+                        )
                         this.updateCards(filteredRecipes)
-                        const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                            filteredRecipes
+                        const appliancesInDropdownMenu =
+                            this.getAppliancesFromRecipes(filteredRecipes)
+                        this.updateAppliancesDropdownMenu(
+                            appliancesInDropdownMenu
                         )
-                        this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
-                        const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                            filteredRecipes
+                        const ustensilsInDropdownMenu =
+                            this.getUstensilsFromRecipes(filteredRecipes)
+                        this.updateUstensilsDropdownMenu(
+                            ustensilsInDropdownMenu
                         )
-                        this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
-                        const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                            filteredRecipes
+                        const ingredientsInDropdownMenu =
+                            this.getIngredientsFromRecipes(filteredRecipes)
+                        this.updateIngredientsDropdownMenu(
+                            ingredientsInDropdownMenu
                         )
-                        this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
                     })
 
                     this.ingredientsTags.push(menuItem.textContent)
                     console.log(this.ingredientsTags)
                 }
                 this.recipes = await this.search(this.searchKeyword)
-                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
+                )
                 console.log(filteredRecipes)
                 this.updateCards(filteredRecipes)
 
-                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                    filteredRecipes
-                )
+                const appliancesInDropdownMenu =
+                    this.getAppliancesFromRecipes(filteredRecipes)
                 this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
 
-                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                    filteredRecipes
-                )
+                const ustensilsInDropdownMenu =
+                    this.getUstensilsFromRecipes(filteredRecipes)
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
 
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    filteredRecipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(filteredRecipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             })
         })
@@ -629,25 +779,35 @@ class App {
         input.addEventListener('input', () => {
             const searchedAppliances = input.value
             if (searchedAppliances !== '') {
-                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                    this.recipes
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
                 )
-                const filteredAppliances = appliancesInDropdownMenu.filter(appliance => appliance.includes(searchedAppliances))
-                this.updateAppliancesDropdownMenu(filteredAppliances, searchedAppliances)
+                const appliancesInDropdownMenu =
+                    this.getAppliancesFromRecipes(filteredRecipes)
+                const filteredAppliances = appliancesInDropdownMenu.filter(
+                    (appliance) => appliance.includes(searchedAppliances)
+                )
+                this.updateAppliancesDropdownMenu(
+                    filteredAppliances,
+                    searchedAppliances
+                )
             } else {
-                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
+                )
                 this.updateCards(filteredRecipes)
-                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                    filteredRecipes
-                )
+                const appliancesInDropdownMenu =
+                    this.getAppliancesFromRecipes(filteredRecipes)
                 this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
-                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                    filteredRecipes
-                )
+                const ustensilsInDropdownMenu =
+                    this.getUstensilsFromRecipes(filteredRecipes)
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    filteredRecipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(filteredRecipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             }
         })
@@ -658,25 +818,35 @@ class App {
         input.addEventListener('input', () => {
             const searchedUstensils = input.value
             if (searchedUstensils !== '') {
-                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                    this.recipes
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
                 )
-                const filteredUstensils = ustensilsInDropdownMenu.filter(ustensil => ustensil.includes(searchedUstensils))
-                this.updateUstensilsDropdownMenu(filteredUstensils, searchedUstensils)
+                const ustensilsInDropdownMenu =
+                    this.getUstensilsFromRecipes(filteredRecipes)
+                const filteredUstensils = ustensilsInDropdownMenu.filter(
+                    (ustensil) => ustensil.includes(searchedUstensils)
+                )
+                this.updateUstensilsDropdownMenu(
+                    filteredUstensils,
+                    searchedUstensils
+                )
             } else {
-                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
+                )
                 this.updateCards(filteredRecipes)
-                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                    filteredRecipes
-                )
+                const appliancesInDropdownMenu =
+                    this.getAppliancesFromRecipes(filteredRecipes)
                 this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
-                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                    filteredRecipes
-                )
+                const ustensilsInDropdownMenu =
+                    this.getUstensilsFromRecipes(filteredRecipes)
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    filteredRecipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(filteredRecipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             }
         })
@@ -687,25 +857,35 @@ class App {
         input.addEventListener('input', () => {
             const searchedIngredients = input.value
             if (searchedIngredients !== '') {
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    this.recipes
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
                 )
-                const filteredIngredients = ingredientsInDropdownMenu.filter(ingredient => ingredient.includes(searchedIngredients))
-                this.updateIngredientsDropdownMenu(filteredIngredients, searchedIngredients)
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(filteredRecipes)
+                const filteredIngredients = ingredientsInDropdownMenu.filter(
+                    (ingredient) => ingredient.includes(searchedIngredients)
+                )
+                this.updateIngredientsDropdownMenu(
+                    filteredIngredients,
+                    searchedIngredients
+                )
             } else {
-                const filteredRecipes = this.filterByTags(this.appliancesTags, this.ustensilsTags, this.ingredientsTags)
+                const filteredRecipes = this.filterByTags(
+                    this.appliancesTags,
+                    this.ustensilsTags,
+                    this.ingredientsTags
+                )
                 this.updateCards(filteredRecipes)
-                const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
-                    filteredRecipes
-                )
+                const appliancesInDropdownMenu =
+                    this.getAppliancesFromRecipes(filteredRecipes)
                 this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
-                const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
-                    filteredRecipes
-                )
+                const ustensilsInDropdownMenu =
+                    this.getUstensilsFromRecipes(filteredRecipes)
                 this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
-                const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
-                    filteredRecipes
-                )
+                const ingredientsInDropdownMenu =
+                    this.getIngredientsFromRecipes(filteredRecipes)
                 this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
             }
         })
@@ -734,41 +914,42 @@ class App {
 
     toKebabCase(str) {
         return str
-            .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
+            .match(
+                /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+            )
             .join('-')
             .toLowerCase()
     }
 
     async displayHomePage() {
         this.recipes = await this.api.getRecipes()
-    
+
         this.displayCards(this.recipes)
-        
+
         const appliancesInDropdownMenu = this.getAppliancesFromRecipes(
             this.recipes
         )
         this.updateAppliancesDropdownMenu(appliancesInDropdownMenu)
-    
+
         const ustensilsInDropdownMenu = this.getUstensilsFromRecipes(
             this.recipes
         )
         this.updateUstensilsDropdownMenu(ustensilsInDropdownMenu)
-    
+
         const ingredientsInDropdownMenu = this.getIngredientsFromRecipes(
             this.recipes
         )
         this.updateIngredientsDropdownMenu(ingredientsInDropdownMenu)
-    
+
         this.createEventsOnSearchBar()
     }
-    
+
     displayErrorPage() {
         console.log(
             'Aucune page ne correspond malheureusement à cette adresse.'
         )
     }
 }
-
 
 // const appliancesInDropdownMenu = recipes
 // .map((recipe) => recipe.appliance)
@@ -791,8 +972,6 @@ class App {
 // (async () => {
 //     const results = await app.searchWithSearchEngine('coc')
 //     console.log(results);})();
-
-
 
 const currentPage = document.location.pathname
 const app = new App()
