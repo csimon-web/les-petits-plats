@@ -89,28 +89,45 @@ class App {
     async search(keyword) {
         this.searchKeyword = keyword.toLowerCase()
         this.recipes = await this.api.getRecipes()
-        return this.recipes.filter(
-            (recipe) =>
-                recipe.name.toLowerCase().includes(this.searchKeyword) ||
-                recipe.description.toLowerCase().includes(this.searchKeyword) ||
-                recipe.ingredients
-                    .map((ingredient) => ingredient.ingredient.toLowerCase())
-                    .some((ingredient) =>
-                        ingredient.includes(this.searchKeyword)
-                    )
-        )
+        const filteredRecipes = []
+        for (const recipe of this.recipes) {
+            if (
+                (recipe.name.toLowerCase().indexOf(this.searchKeyword) !== -1 ||
+                    recipe.description
+                        .toLowerCase()
+                        .indexOf(this.searchKeyword) !== -1) &&
+                filteredRecipes.indexOf(recipe) === -1
+            ) {
+                filteredRecipes.push(recipe)
+            }
+            if (filteredRecipes.indexOf(recipe) === -1) {
+                for (const ingredient of recipe.ingredients) {
+                    if (
+                        ingredient.ingredient
+                            .toLowerCase()
+                            .indexOf(this.searchKeyword) !== -1 &&
+                        filteredRecipes.indexOf(recipe) === -1
+                    ) {
+                        filteredRecipes.push(recipe)
+                    }
+                }
+            }
+        }
+        return filteredRecipes
     }
 
     getAppliancesFromRecipes(recipes) {
-        return recipes
-            .map((recipe) => recipe.appliance)
-            .filter((value, index, self) => self.indexOf(value) === index)
+        const appliancesInDropdown = []
+        for (const recipe of recipes) {
+            if (appliancesInDropdown.indexOf(recipe.appliance) === -1) {
+                appliancesInDropdown.push(recipe.appliance)
+            }
+        }
+        return appliancesInDropdown
     }
 
     getUstensilsFromRecipes(recipes) {
         const ustensilsInDropdownMenu = []
-        // const ustensils = recipes
-        // .map((recipe) => recipe.ustensils)
         for (const recipe of recipes) {
             for (const ustensil of recipe.ustensils) {
                 if (ustensilsInDropdownMenu.indexOf(ustensil) === -1) {
