@@ -10,7 +10,7 @@ class App {
             'ingredients_dropdown_menu'
         )
         this.recipesWrapper = document.querySelector('.recipes > .row')
-        this.recipes
+        this.recipes = []
         this.searchKeyword = ''
         this.appliancesTags = []
         this.ustensilsTags = []
@@ -198,7 +198,7 @@ class App {
                 (appliancesInDropdownMenu.length % 3 !== 0
                     ? Math.floor(appliancesInDropdownMenu.length / 3)
                     : Math.floor(appliancesInDropdownMenu.length / 3) - 1);
-                i++
+                i += 1
             ) {
                 const appliancesTemplate = new AppliancesDropdownMenu(
                     appliancesInDropdownMenu[i]
@@ -215,7 +215,7 @@ class App {
                     ? Math.floor((2 * appliancesInDropdownMenu.length) / 3)
                     : Math.floor((2 * appliancesInDropdownMenu.length) / 3) -
                       1);
-                i++
+                i += 1
             ) {
                 const appliancesTemplate = new AppliancesDropdownMenu(
                     appliancesInDropdownMenu[i]
@@ -228,7 +228,7 @@ class App {
             for (
                 let i = Math.ceil((2 * appliancesInDropdownMenu.length) / 3);
                 i <= Math.floor(appliancesInDropdownMenu.length);
-                i++
+                i += 1
             ) {
                 const appliancesTemplate = new AppliancesDropdownMenu(
                     appliancesInDropdownMenu[i]
@@ -288,7 +288,7 @@ class App {
                 (ustensilsInDropdownMenu.length % 3 !== 0
                     ? Math.floor(ustensilsInDropdownMenu.length / 3)
                     : Math.floor(ustensilsInDropdownMenu.length / 3) - 1);
-                i++
+                i += 1
             ) {
                 const ustensilsTemplate = new UstensilsDropdownMenu(
                     ustensilsInDropdownMenu[i]
@@ -304,7 +304,7 @@ class App {
                 (ustensilsInDropdownMenu.length % 3 !== 0
                     ? Math.floor((2 * ustensilsInDropdownMenu.length) / 3)
                     : Math.floor((2 * ustensilsInDropdownMenu.length) / 3) - 1);
-                i++
+                i += 1
             ) {
                 const ustensilsTemplate = new UstensilsDropdownMenu(
                     ustensilsInDropdownMenu[i]
@@ -317,7 +317,7 @@ class App {
             for (
                 let i = Math.ceil((2 * ustensilsInDropdownMenu.length) / 3);
                 i <= Math.floor(ustensilsInDropdownMenu.length);
-                i++
+                i += 1
             ) {
                 const ustensilsTemplate = new UstensilsDropdownMenu(
                     ustensilsInDropdownMenu[i]
@@ -379,7 +379,7 @@ class App {
                 (ingredientsInDropdownMenu.length % 3 !== 0
                     ? Math.floor(ingredientsInDropdownMenu.length / 3)
                     : Math.floor(ingredientsInDropdownMenu.length / 3) - 1);
-                i++
+                i += 1
             ) {
                 const ingredientsTemplate = new IngredientsDropdownMenu(
                     ingredientsInDropdownMenu[i]
@@ -396,7 +396,7 @@ class App {
                     ? Math.floor((2 * ingredientsInDropdownMenu.length) / 3)
                     : Math.floor((2 * ingredientsInDropdownMenu.length) / 3) -
                       1);
-                i++
+                i += 1
             ) {
                 const ingredientsTemplate = new IngredientsDropdownMenu(
                     ingredientsInDropdownMenu[i]
@@ -409,7 +409,7 @@ class App {
             for (
                 let i = Math.ceil((2 * ingredientsInDropdownMenu.length) / 3);
                 i <= Math.floor(ingredientsInDropdownMenu.length);
-                i++
+                i += 1
             ) {
                 const ingredientsTemplate = new IngredientsDropdownMenu(
                     ingredientsInDropdownMenu[i]
