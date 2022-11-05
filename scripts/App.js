@@ -18,74 +18,6 @@ class App {
         this.api = new Api('/data/recipes.json')
     }
 
-    async filterWithAnAppliance(appliance) {
-        const applianceInLowerCase = appliance.toLowerCase()
-        this.recipes = await this.api.getRecipes()
-        return this.recipes.filter((recipe) =>
-            recipe.appliance.toLowerCase().includes(applianceInLowerCase)
-        )
-    }
-
-    async filterWithAnUstensil(ustensil) {
-        const ustensilInLowerCase = ustensil.toLowerCase()
-        this.recipes = await this.api.getRecipes()
-        return this.recipes.filter((recipe) =>
-            recipe.ustensils.some((ustensil) =>
-                ustensil.toLowerCase().includes(ustensilInLowerCase)
-            )
-        )
-    }
-
-    async filterWithAnIngredient(ingredient) {
-        const ingredientInLowerCase = ingredient.toLowerCase()
-        this.recipes = await this.api.getRecipes()
-        return this.recipes.filter((recipe) =>
-            recipe.ingredients.some((recipe) =>
-                recipe.ingredient.toLowerCase().includes(ingredientInLowerCase)
-            )
-        )
-    }
-
-    async filterWithAppliancesTags(appliances) {
-        const appliancesInLowerCase = appliances.map((appliance) =>
-            appliance.toLowerCase()
-        )
-        this.recipes = await this.api.getRecipes()
-        return this.recipes.filter((recipe) =>
-            appliancesInLowerCase.every((appliance) =>
-                recipe.appliance.toLowerCase().includes(appliance)
-            )
-        )
-    }
-
-    async filterWithUstensilsTags(ustensils) {
-        const ustensilsInLowerCase = ustensils.map((ustensil) =>
-            ustensil.toLowerCase()
-        )
-        this.recipes = await this.api.getRecipes()
-        return this.recipes.filter((recipe) =>
-            ustensilsInLowerCase.every((ustensil) =>
-                recipe.ustensils
-                    .map((ustensil) => ustensil.toLowerCase())
-                    .includes(ustensil)
-            )
-        )
-    }
-
-    async filterWithIngredientsTags(ingredients) {
-        const ingredientsInLowerCase = ingredients.map((ingredient) =>
-            ingredient.toLowerCase()
-        )
-        this.recipes = await this.api.getRecipes()
-        return this.recipes.filter((recipe) =>
-            ingredientsInLowerCase.every((ingredient) =>
-                recipe.ingredients
-                    .map((recipe) => recipe.ingredient.toLowerCase())
-                    .includes(ingredient)
-            )
-        )
-    }
-
     async search(keyword) {
         this.searchKeyword = keyword.toLowerCase()
         this.recipes = await this.api.getRecipes()
@@ -967,28 +899,6 @@ class App {
         )
     }
 }
-
-// const appliancesInDropdownMenu = recipes
-// .map((recipe) => recipe.appliance)
-// .filter((value, index, self) => self.indexOf(value) === index)
-
-// const app = new App();
-
-// const filteredResults = app.searchWithSearchEngine('coco')
-// console.log(filteredResults)
-
-// app.filterWithAnAppliance('sALA')
-// app.filterWithAnUstensil('écon')
-// app.filterWithAnIngredient('CoCo')
-
-// app.filterWithAppliancesTags(['Four'])
-// app.filterWithAppliancesTags(['Four', 'Saladier'])
-// app.filterWithUstensilsTags(['CouTEAu', 'râpe à FROMAGE'])
-// app.filterWithIngredientsTags(['Lait De CoCo', 'ToMaTe'])
-
-// (async () => {
-//     const results = await app.searchWithSearchEngine('coc')
-//     console.log(results);})();
 
 const currentPage = document.location.pathname
 const app = new App()
