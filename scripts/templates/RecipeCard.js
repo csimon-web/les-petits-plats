@@ -16,7 +16,6 @@ class RecipeCard {
             } else {
                 ingredients += `<span class="ingredients">${ingredient.ingredient}</span><br>`
             }
-
         }
 
         const recipeCard = document.createElement('div')
