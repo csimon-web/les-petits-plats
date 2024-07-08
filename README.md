@@ -60,16 +60,16 @@ cd les-petits-plats
 npm install
 ```
 
-4. Install live-server to launch a local server
+4. Install http-server to launch a local server
 
 ```sh
-npm install -g live-server
+npm install -g http-server
 ```
 
 5. Launch the application
 
 ```sh
-live-server
+http-server -c-1 -o
 ```
 
 6. Go to the http://127.0.0.1:8080/ address in your favorite browser
