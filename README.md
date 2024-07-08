@@ -15,11 +15,13 @@
 
 ## About The Project
 
-[![Les petits plats screenshot][product-screenshot]](https://example.com)
+[![Les petits plats screenshot][product-screenshot]](#)
 
-This project is a cooking recipes website, made as a student.
+This project is a cooking recipes website, made as a student. It enables to display cooking recipes according to the wishes of the user.
 
-It enables to display cooking recipes according to the wishes of the user.
+The data come from a json file.
+
+You can have a look on this web application here: https://les-petits-plats.csimon.info/
 
 ### Built With
 
