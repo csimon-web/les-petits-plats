@@ -39,40 +39,43 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 -   Git
+-   Npm
 
 ### Installation
 
-1. Clone the repo
+1. Open a terminal
+
+2. Clone the repo
 
 ```sh
 git clone https://github.com/csimon-web/les-petits-plats.git
 ```
 
-2. Go to "les-petits-plats" project
+3. Go to "les-petits-plats" project
 
 ```sh
 cd les-petits-plats
 ```
 
-3. Install the packages listed in packages.json
+4. Install the packages listed in packages.json
 
 ```sh
 npm install
 ```
 
-4. Install http-server to launch a local server
+5. Install http-server to launch a local server
 
 ```sh
 npm install -g http-server
 ```
 
-5. Launch the application
+6. Launch the application
 
 ```sh
 http-server -c-1 -o
 ```
 
-6. Go to the http://127.0.0.1:8080/ address in your favorite browser
+7. Go to the http://127.0.0.1:8080/ address in your favorite browser
 
 <!-- USAGE EXAMPLES -->
 
